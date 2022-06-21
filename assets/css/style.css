@@ -67,6 +67,53 @@
     padding:10px;
 }
 
+.forecast-container{
+    display:flex;
+    /* border: solid 1px black; */
+    float:left;
+    width:75%;
+    height: 50%;
+    margin-top: 10px;
+    /* padding:10px; */
+    margin-left: 20%;
+
+}
+
+.forecast-header{
+    display:flex;
+    /* border: solid 1px black; */
+    float:left;
+    width:75%;
+    height: 50%;
+    margin-top: 10px;
+    margin-left: 20%;
+    padding-top: 10px;
+
+}
+
+.forecast{
+    display:flex;
+    font-size:30px;
+    padding-bottom: 20px;
+}
+
+.forecast-info{
+    justify-content: space-between;;
+    width:20%;
+    background-color:#27445C;
+    border: 1px solid grey;
+    color: white;
+    padding-left: 10px;
+    padding-top: 10px;
+    
+    
+}
+
+.forecast-date{
+    font-size: 25px;
+    font-weight: bolder;
+}
+
 .recentBtn{
     background: grey;
     cursor: pointer;
