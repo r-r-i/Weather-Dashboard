@@ -14,21 +14,44 @@
         <h1>Weather Dashboard</h1>
     </header>
 
+    <aside>
+        <div class="side-container">
+            <h2 class="search-head" >Search for a City:</h2>
     
-    <div class="side-container">
-        <h2 class="search-head" >Search for a City:</h2>
+            <div class="search-container">
+                <div class="search outline">
+                    <input type="search" id="search" class="search-input">
+                    <label for="search"></label>
+                </div>
+                <button type="button" class="searchBtn">
+                    <i class="searchButton">Search</i>
+                </button>
+            </div>
+            
 
-        <div class="search-container">
-            <div class="search outline">
-                <input type="search" id="search" class="search-input">
-                <label for="search"></label>
+            
+            <div id="recent-result">
+                <button type="button" class="recentBtn">
+                    <i class="recentButton">Sydney</i>
+                </button>
             </div>
         </div>
-        <button type="button" class="searchBtn">
-            <i class="searchButton">Search</i>
-        </button>
+        
+    </aside>
 
+    <div class="today-container">
+        <h1 class="today">Sydney (3/30/2021)</h1>
+        <ul class="today-info">
+            <li id="temp">Temp:</li>
+            <li id="wind">Wind:</li>
+            <li id="humid">Humidity:</li>
+            <li id="uvi">UV Index:</li>
+        </ul>
     </div>
+
+    
+    
+    
     
     
     

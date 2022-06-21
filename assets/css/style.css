@@ -15,10 +15,20 @@
 
 
 .side-container{
+    float:left;
+    width:20%;
     display:flex;
     flex-direction: column;
     padding-left: 10px;
     padding-top:10px;
+    padding-bottom: 10px;
+}
+
+.search-container{
+    border-bottom: 5px solid grey;
+    border-radius: 2px;
+    width: 300px;
+    padding-bottom: 10px;
 }
 
 .search-input{
@@ -29,9 +39,8 @@
     
 }
 
-.searchButton{
-    color:white;
-}
+
+
 
 .searchBtn{
     background: #436EEE;
@@ -40,6 +49,40 @@
     border:none;
     width:300px;
     height:30px;
+    color:white;
+}
+
+.today{
+    font-size:40px;
+    padding-bottom: 20px;
+
+}
+
+.today-container{
+    border: solid 1px black;
+    float:left;
+    width:75%;
+    height: 50%;
+    margin-top: 10px;
+    padding:10px;
+}
+
+.recentBtn{
+    background: grey;
+    cursor: pointer;
+    border-radius: 6px;
+    border:none;
+    width:300px;
+    height:30px;
+    color:white;
+    margin-top: 10px;
+}
+
+
+
+ul li {
+    padding-bottom: 30px;
+   
 }
 
 .searchBtn:hover{
@@ -47,6 +90,15 @@
 }
 
 .searchBtn:active{
+    background-color: #adbce6;
+    transform: translateY(3px);
+}
+
+.recentBtn:hover{
+    background-color: #C0C0C0
+}
+
+.recentBtn:active{
     background-color: #adbce6;
     transform: translateY(3px);
 }
