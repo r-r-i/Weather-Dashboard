@@ -17,11 +17,7 @@ const forecastToday = function(city){
         .then(function (data) {
             console.log(data)
 
-            document.getElementById('city').textContent = city;
-            
-            
-            
-            
+            document.getElementById('city').textContent = city + moment().format('DD-MM-YY');
 
             var lat = data.coord.lat;
             console.log(lat)
@@ -42,10 +38,23 @@ const futureForecast = function(lat, lon){
     })
     .then(function(data){
         console.log(data)
-        document.getElementById('uvi').textContent = "UV Index: " + data.daily[0].uvi;
-        document.getElementById('wind').textContent = "Wind: " + data.daily[0].wind_speed + "MPH";
-        document.getElementById('humid').textContent = "Humidity: " + data.daily[0].humidity + "%";
-        document.getElementById('temp').textContent = "Temp: " + Math.round(data.daily[0].temp.max - 273.15) / 1 + "°C";
+
+        for (i = 0; i < 5; i++) {
+            document.getElementById('date' + (i + 1)).textContent = moment().add(i + 1, 'd').format('DD-MM-YY');
+
+            let icon = data.daily[i].weather[0].icon;
+            let iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+
+            document.getElementById('icon' + (i + 1)).setAttribute('src',iconURL)
+            document.getElementById('temp' + (i + 1)).textContent = "Temp: " + Math.round(data.daily[i].temp.max - 273.15) / 1 + "°C";
+            document.getElementById('wind' + (i + 1)).textContent = "Wind: " + data.daily[i].wind_speed + "MPH";
+            document.getElementById('humid'+ (i + 1)).textContent = "Humidity: " + data.daily[i].humidity + "%";
+        }
+
+        document.getElementById('uvHead').textContent = "UV Index: " + data.daily[0].uvi;
+        document.getElementById('windHead').textContent = "Wind: " + data.daily[0].wind_speed + "MPH";
+        document.getElementById('humidHead').textContent = "Humidity: " + data.daily[0].humidity + "%";
+        document.getElementById('tempHead').textContent = "Temp: " + Math.round(data.daily[0].temp.max - 273.15) / 1 + "°C";
     })
 
     
