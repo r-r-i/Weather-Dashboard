@@ -51,11 +51,11 @@ const futureForecast = function(lat, lon){
             document.getElementById('humid'+ (i + 1)).textContent = "Humidity: " + data.daily[i].humidity + "%";
         }
 
-        document.getElementById('uvHead').textContent = "UV Index: " + data.daily[0].uvi;
-        document.getElementById('windHead').textContent = "Wind: " + data.daily[0].wind_speed + "MPH";
-        document.getElementById('humidHead').textContent = "Humidity: " + data.daily[0].humidity + "%";
-        document.getElementById('tempHead').textContent = "Temp: " + Math.round(data.daily[0].temp.max - 273.15) / 1 + "°C";
-    })
+            document.getElementById('uvHead').textContent = "UV Index: " + data.daily[0].uvi;
+            document.getElementById('windHead').textContent = "Wind: " + data.daily[0].wind_speed + "MPH";
+            document.getElementById('humidHead').textContent = "Humidity: " + data.daily[0].humidity + "%";
+            document.getElementById('tempHead').textContent = "Temp: " + Math.round(data.daily[0].temp.max - 273.15) / 1 + "°C";
+        })
 
     
 }
