@@ -1,9 +1,7 @@
-var tempEl = document.querySelector("temp")
-var windEl = document.querySelector("wind")
-var humidEl = document.querySelector("humid")
-var UvApi = `https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=${ApiKey}`
-
-var ApiKey = '3504fa995df282c68b33b62fed2eee63';
+// var tempEl = document.querySelector("temp")
+// var windEl = document.querySelector("wind")
+// var humidEl = document.querySelector("humid")
+const ApiKey = '3504fa995df282c68b33b62fed2eee63';
 
 
 
@@ -19,9 +17,9 @@ const forecastToday = function(city){
 
             document.getElementById('city').textContent = city + moment().format('DD-MM-YY');
 
-            var lat = data.coord.lat;
+            let lat = data.coord.lat;
             console.log(lat)
-            var lon = data.coord.lon;
+            let lon = data.coord.lon;
             console.log(lon);
 
             futureForecast(lat, lon);
