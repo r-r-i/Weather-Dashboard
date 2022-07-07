@@ -2,12 +2,26 @@
 // var windEl = document.querySelector("wind")
 // var humidEl = document.querySelector("humid")
 const ApiKey = '3504fa995df282c68b33b62fed2eee63';
+const searchBtn = document.getElementById('searchCity');
+
+let input = document.querySelector('input[type = "search"]');
+
+
+
+searchBtn.addEventListener('click', function(event){
+    event.preventDefault;
+    console.log(input.value)
+    citySearch();
+})
 
 
 
 const forecastToday = function(city){
     ApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ApiKey}`
 
+
+    state.previousCity.push(city);
+    saveCity();
     fetch(ApiUrl)
         .then(function(response) {
             return response.json();
@@ -29,6 +43,8 @@ const forecastToday = function(city){
 const futureForecast = function(lat, lon){
     ApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${ApiKey}`
 
+
+
     fetch(ApiUrl)
     .then(function(response){
         return response.json();
@@ -49,11 +65,50 @@ const futureForecast = function(lat, lon){
         }
 
             document.getElementById('uvHead').textContent = data.daily[0].uvi;
-            document.getElementById('uvHead').classList.add("uvBg");
+            document.getElementById('uvHead').setAttribute("class", uvColor(data.daily[0].uvi) );
             document.getElementById('windHead').textContent = "Wind: " + data.daily[0].wind_speed + "MPH";
             document.getElementById('humidHead').textContent = "Humidity: " + data.daily[0].humidity + "%";
             document.getElementById('tempHead').textContent = "Temp: " + Math.round(data.daily[0].temp.max - 273.15) / 1 + "°C";
         })
-
-    
 }
+
+let state = {
+    previousCity: []
+}
+
+const uvColor = (uvIndex) => {
+    if (uvIndex < 3){
+        return "fav";
+    } else if (uvIndex = 6){
+        return "mod";
+    } else return 'sev';
+}
+
+
+const citySearch = ()=> {
+    let city = input.value;
+    forecastToday(city);
+}
+
+let saveCity = () => {
+    localStorage.setItem("previousCity" , JSON.stringify(state));
+}
+
+let loadCity = () => {
+    state = JSON.parse(localStorage.getItem("previousCity"));
+}
+
+let renderLastSearch = () => {
+    loadCity();
+
+    for (let i=0; i < state.previousCity.length; i++){
+
+
+    }
+
+
+}
+
+
+
+

@@ -39,12 +39,31 @@
     
 }
 
-.uvBg{
+
+
+.fav{
     background-color: green;
     color: #FFF;
     border-radius: 5px;
     padding: 6px;
     margin:2px;
+}
+.mod{
+    background-color: orange;
+    color: #FFF;
+    border-radius: 5px;
+    padding: 6px;
+    margin:2px;
+
+}
+
+.sev{
+    background-color: red;
+    color: #FFF;
+    border-radius: 5px;
+    padding: 6px;
+    margin:2px;
+
 }
 
 
