@@ -15,7 +15,11 @@ const forecastToday = function(city){
         .then(function (data) {
             console.log(data)
 
-            document.getElementById('city').textContent = city + moment().format('DD-MM-YY');
+        
+
+            document.getElementById('city').textContent = city + " " + moment().format('DD-MM-YY');
+
+            
 
             let lat = data.coord.lat;
             console.log(lat)
@@ -49,7 +53,8 @@ const futureForecast = function(lat, lon){
             document.getElementById('humid'+ (i + 1)).textContent = "Humidity: " + data.daily[i].humidity + "%";
         }
 
-            document.getElementById('uvHead').textContent = "UV Index: " + data.daily[0].uvi;
+            document.getElementById('uvHead').textContent = data.daily[0].uvi;
+            document.getElementById('uvHead').classList.add("uvBg");
             document.getElementById('windHead').textContent = "Wind: " + data.daily[0].wind_speed + "MPH";
             document.getElementById('humidHead').textContent = "Humidity: " + data.daily[0].humidity + "%";
             document.getElementById('tempHead').textContent = "Temp: " + Math.round(data.daily[0].temp.max - 273.15) / 1 + "°C";
