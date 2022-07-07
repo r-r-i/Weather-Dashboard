@@ -14,12 +14,7 @@ const forecastToday = function(city){
         })
         .then(function (data) {
             console.log(data)
-
-        
-
-            document.getElementById('city').textContent = city + " " + moment().format('DD-MM-YY');
-
-            
+            document.getElementById('city').textContent = city + " " + moment().format('D-M-Y');
 
             let lat = data.coord.lat;
             console.log(lat)
@@ -42,7 +37,7 @@ const futureForecast = function(lat, lon){
         console.log(data)
 
         for (i = 0; i < 5; i++) {
-            document.getElementById('date' + (i + 1)).textContent = moment().add(i + 1, 'd').format('DD-MM-YY');
+            document.getElementById('date' + (i + 1)).textContent = moment().add(i + 1, 'd').format('D-M-Y');
 
             let icon = data.daily[i].weather[0].icon;
             let iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
