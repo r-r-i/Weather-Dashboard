@@ -79,10 +79,11 @@ let state = {
     previousCity: []
 }
 
+
 const uvColor = (uvIndex) => {
     if (uvIndex < 3){
         return "fav";
-    } else if (uvIndex = 6){
+    } else if (uvIndex <= 6){
         return "mod";
     } else return 'sev';
 }
@@ -103,23 +104,26 @@ let loadCity = () => {
 let renderLastSearch = () => {
     loadCity();
 
-    for (let i=1; i <= state.previousCity.length; i++){
+    let div = document.getElementById("recent-result");
+    div.innerHTML = "";
+
+    for (let i=0; i < state.previousCity.length; i++){
 
         let create = document.createElement("button")
         create.setAttribute("class", "recentBtn")
         create.setAttribute("type", "button")
-        let node = document.createTextNode(input.value)
+        let node = document.createTextNode(state.previousCity[i])
         create.appendChild(node)
-    
-        const div = document.getElementById("recent-result");
         div.appendChild(create)
     
-        saveCity()
+        
         console.log(state)
+        
 
 
     }
-
+    
+    saveCity()
 
 }
 
