@@ -5,17 +5,19 @@ const ApiKey = '3504fa995df282c68b33b62fed2eee63';
 const searchBtn = document.getElementById('searchCity');
 
 let input = document.querySelector('input[type = "search"]');
+let containerDiv = document.getElementById('container');
 
 
-
+// Event listener for Search button. 
 searchBtn.addEventListener('click', function(event){
     event.preventDefault;
     console.log(input.value)
     citySearch();
+    renderLastSearch()
 })
 
 
-
+// API call that retrieves the data for todays forecast.
 const forecastToday = function(city){
     ApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ApiKey}`
 
@@ -37,12 +39,13 @@ const forecastToday = function(city){
 
             futureForecast(lat, lon);
         });
+
+        
 }
 
-
+// API call that retrieves the forecast for the next 5 days.
 const futureForecast = function(lat, lon){
     ApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${ApiKey}`
-
 
 
     fetch(ApiUrl)
@@ -84,7 +87,6 @@ const uvColor = (uvIndex) => {
     } else return 'sev';
 }
 
-
 const citySearch = ()=> {
     let city = input.value;
     forecastToday(city);
@@ -101,13 +103,27 @@ let loadCity = () => {
 let renderLastSearch = () => {
     loadCity();
 
-    for (let i=0; i < state.previousCity.length; i++){
+    for (let i=1; i <= state.previousCity.length; i++){
+
+        let create = document.createElement("button")
+        create.setAttribute("class", "recentBtn")
+        create.setAttribute("type", "button")
+        let node = document.createTextNode(input.value)
+        create.appendChild(node)
+    
+        const div = document.getElementById("recent-result");
+        div.appendChild(create)
+    
+        saveCity()
+        console.log(state)
 
 
     }
 
 
 }
+
+
 
 
 
