@@ -107,26 +107,35 @@ let renderLastSearch = () => {
     let div = document.getElementById("recent-result");
     div.innerHTML = "";
 
-    for (let i=0; i < state.previousCity.length; i++){
+    for (let i = 0; i < state.previousCity.length; i++){
 
         let create = document.createElement("button")
         create.setAttribute("class", "recentBtn")
         create.setAttribute("type", "button")
+
         let node = document.createTextNode(state.previousCity[i])
         create.appendChild(node)
         div.appendChild(create)
+
+        create.addEventListener('click', function(event){   //THIS DOES NOT WORK, CREATES MORE BUTTONS ON CLICK
+            event.preventDefault;
+            forecastToday(state.previousCity[i])
+            futureForecast(state.previousCity[i])
+
+        })
     
         
         console.log(state)
         
-
-
     }
-    
+
     saveCity()
 
 }
 
+
+// TO DO: LOCAL STORAGE IS NOT SAVED ON PAGE RELOAD..
+// DISPLAY CITY'S WEATHER INFORMATION ON BUTTON CLICK. FIX EVENT LISTENER.
 
 
 
