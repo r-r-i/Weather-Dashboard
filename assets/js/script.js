@@ -20,7 +20,7 @@ searchBtn.addEventListener('click', function(event){
 
 // API call that retrieves the data for todays forecast.
 const forecastToday = function(city){
-    ApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ApiKey}`
+    ApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ApiKey}`;
 
 
     state.previousCity.push(city);
@@ -76,11 +76,12 @@ const futureForecast = function(lat, lon){
         })
 }
 
+// Array that stores previously searched cities.
 let state = {
     previousCity: []
 }
 
-
+// Function that changes the color of UV Index based on intensity.
 const uvColor = (uvIndex) => {
     if (uvIndex < 3){
         return "fav";
@@ -93,15 +94,17 @@ const citySearch = ()=> {
     let city = input.value;
     forecastToday(city);
 }
-
+// Function that stores the searched for city.
 let saveCity = () => {
     localStorage.setItem("previousCity" , JSON.stringify(state));
 }
-
+// Function that gets the stored array of previously search for cities.
 let loadCity = () => {
     state = JSON.parse(localStorage.getItem("previousCity"));
 }
 
+
+// Function that creates a button for each city searched for.
 let renderLastSearch = () => {
     loadCity();
 
@@ -133,9 +136,6 @@ let renderLastSearch = () => {
     saveCity()
 
 }
-
-
-
 
 
 renderLastSearch()
