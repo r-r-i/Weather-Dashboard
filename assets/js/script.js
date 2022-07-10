@@ -8,6 +8,11 @@ let input = document.querySelector('input[type = "search"]');
 let containerDiv = document.getElementById('container');
 let recentButton = document.getElementsByClassName('recentBtn');
 
+// Array that stores previously searched city
+let state = {
+    previousCity: []
+}
+
 
 // Event listener for Search button. 
 searchBtn.addEventListener('click', function(event){
@@ -21,10 +26,10 @@ searchBtn.addEventListener('click', function(event){
 // API call that retrieves the data for todays forecast.
 const forecastToday = function(city){
     ApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ApiKey}`;
-
-
+    
     state.previousCity.push(city);
     saveCity();
+
     fetch(ApiUrl)
         .then(function(response) {
             return response.json();
@@ -76,10 +81,7 @@ const futureForecast = function(lat, lon){
         })
 }
 
-// Array that stores previously searched cities.
-let state = {
-    previousCity: []
-}
+
 
 // Function that changes the color of UV Index based on intensity.
 const uvColor = (uvIndex) => {
@@ -100,7 +102,7 @@ let saveCity = () => {
 }
 // Function that gets the stored array of previously search for cities.
 let loadCity = () => {
-    state = JSON.parse(localStorage.getItem("previousCity"));
+    state = JSON.parse(localStorage.getItem("previousCity")) || { previousCity: [] };
 }
 
 
@@ -111,30 +113,26 @@ let renderLastSearch = () => {
     let div = document.getElementById("recent-result");
     div.innerHTML = "";
 
-    for (let i = 0; i < state.previousCity.length; i++){
+    if(state.previousCity.length > 0){
+        for (let i = 0; i < state.previousCity.length; i++){
 
-        let create = document.createElement("button")
-        create.setAttribute("class", "recentBtn recentButton")
-        create.setAttribute("type", "button")
-
-        let node = document.createTextNode(state.previousCity[i])
-        create.appendChild(node)
-        div.appendChild(create)
-
-        create.addEventListener('click', function(event){   //THIS DOES NOT WORK, CREATES MORE BUTTONS ON CLICK
-            event.preventDefault;
-            forecastToday(state.previousCity[i])
-            futureForecast(state.previousCity[i])
-
-        })
+            let create = document.createElement("button")
+            create.setAttribute("class", "recentBtn recentButton")
+            create.setAttribute("type", "button")
     
+            let node = document.createTextNode(state.previousCity[i])
+            create.addEventListener('click', function(event){
+                event.preventDefault;
+                forecastToday(state.previousCity[i]);
+            });
+            create.appendChild(node)
+            div.appendChild(create)
         
-        console.log(state)
-        
+            console.log(state)
+            
+        }
     }
-
     saveCity()
-
 }
 
 
