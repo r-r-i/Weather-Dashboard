@@ -41,9 +41,9 @@ searchBtn.addEventListener('click', function(event){
 const forecastToday = function(city){
     ApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ApiKey}`;
 
-    // hasDuplicates()
     
-
+    
+    // IF statement that checks if the searched city is already in the array.
     if(state.previousCity.includes(city)){
         console.log("already in array!")
     } else {
@@ -57,7 +57,7 @@ const forecastToday = function(city){
         })
         .then(function (data) {
             console.log(data)
-            document.getElementById('city').textContent = city + " " + moment().format('D-M-Y');
+            document.getElementById('city').textContent = city + " " + "(" + moment().format('l')+")";
 
             let lat = data.coord.lat;
             console.log(lat)
