@@ -22,11 +22,26 @@ searchBtn.addEventListener('click', function(event){
     renderLastSearch()
 })
 
+// function hasDuplicates(previousCity){
+//     let valuesSoFar = Object.create(null);
+//     for (var i = 0; i < state.previousCity.length ; i++){
+//         var value = previousCity[i];
+//             if (value in valuesSoFar){
+//                 return;
+//             } else {
+//                 state.previousCity.push(city);
+//                 saveCity();
+//             }
+
+//     }
+// }
+
 
 // API call that retrieves the data for todays forecast.
 const forecastToday = function(city){
     ApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ApiKey}`;
-    
+
+    // hasDuplicates()
     state.previousCity.push(city);
     saveCity();
 
@@ -48,6 +63,8 @@ const forecastToday = function(city){
 
         
 }
+
+
 
 // API call that retrieves the forecast for the next 5 days.
 const futureForecast = function(lat, lon){
