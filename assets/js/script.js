@@ -42,8 +42,14 @@ const forecastToday = function(city){
     ApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ApiKey}`;
 
     // hasDuplicates()
-    state.previousCity.push(city);
-    saveCity();
+    
+
+    if(state.previousCity.includes(city)){
+        console.log("already in array!")
+    } else {
+        state.previousCity.push(city);
+        saveCity();
+    }
 
     fetch(ApiUrl)
         .then(function(response) {
