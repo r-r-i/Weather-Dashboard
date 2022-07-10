@@ -6,6 +6,7 @@ const searchBtn = document.getElementById('searchCity');
 
 let input = document.querySelector('input[type = "search"]');
 let containerDiv = document.getElementById('container');
+let recentButton = document.getElementsByClassName('recentBtn');
 
 
 // Event listener for Search button. 
@@ -110,7 +111,7 @@ let renderLastSearch = () => {
     for (let i = 0; i < state.previousCity.length; i++){
 
         let create = document.createElement("button")
-        create.setAttribute("class", "recentBtn")
+        create.setAttribute("class", "recentBtn recentButton")
         create.setAttribute("type", "button")
 
         let node = document.createTextNode(state.previousCity[i])
@@ -132,6 +133,12 @@ let renderLastSearch = () => {
     saveCity()
 
 }
+
+
+
+
+
+renderLastSearch()
 
 
 // TO DO: LOCAL STORAGE IS NOT SAVED ON PAGE RELOAD..
