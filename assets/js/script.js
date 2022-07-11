@@ -1,6 +1,3 @@
-// var tempEl = document.querySelector("temp")
-// var windEl = document.querySelector("wind")
-// var humidEl = document.querySelector("humid")
 const ApiKey = '3504fa995df282c68b33b62fed2eee63';
 const searchBtn = document.getElementById('searchCity');
 
@@ -17,35 +14,18 @@ let state = {
 // Event listener for Search button. 
 searchBtn.addEventListener('click', function(event){
     event.preventDefault;
-    console.log(input.value)
     citySearch();
     renderLastSearch()
 })
-
-// function hasDuplicates(previousCity){
-//     let valuesSoFar = Object.create(null);
-//     for (var i = 0; i < state.previousCity.length ; i++){
-//         var value = previousCity[i];
-//             if (value in valuesSoFar){
-//                 return;
-//             } else {
-//                 state.previousCity.push(city);
-//                 saveCity();
-//             }
-
-//     }
-// }
 
 
 // API call that retrieves the data for todays forecast.
 const forecastToday = function(city){
     ApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ApiKey}`;
 
-    
-    
     // IF statement that checks if the searched city is already in the array.
     if(state.previousCity.includes(city)){
-        console.log("already in array!")
+        console.log("already a button!")
     } else {
         state.previousCity.push(city);
         saveCity();
@@ -56,13 +36,10 @@ const forecastToday = function(city){
             return response.json();
         })
         .then(function (data) {
-            console.log(data)
             document.getElementById('city').textContent = city + " " + "(" + moment().format('l')+")";
 
             let lat = data.coord.lat;
-            console.log(lat)
             let lon = data.coord.lon;
-            console.log(lon);
 
             futureForecast(lat, lon);
         });
@@ -82,7 +59,11 @@ const futureForecast = function(lat, lon){
         return response.json();
     })
     .then(function(data){
-        console.log(data)
+
+        let iconcode = data.current.weather[0].icon;
+        let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+
+        document.getElementById('iconTop').setAttribute('src',iconurl)
 
         for (i = 0; i < 5; i++) {
             document.getElementById('date' + (i + 1)).textContent = moment().add(i + 1, 'd').format('D-M-Y');
@@ -110,19 +91,23 @@ const futureForecast = function(lat, lon){
 const uvColor = (uvIndex) => {
     if (uvIndex < 3){
         return "fav";
-    } else if (uvIndex <= 6){
+    } else if (uvIndex < 6){
         return "mod";
-    } else return 'sev';
+    } else if (uvIndex > 6){
+        return 'sev';
+    }  
 }
 
 const citySearch = ()=> {
     let city = input.value;
     forecastToday(city);
 }
+
 // Function that stores the searched for city.
 let saveCity = () => {
     localStorage.setItem("previousCity" , JSON.stringify(state));
 }
+
 // Function that gets the stored array of previously search for cities.
 let loadCity = () => {
     state = JSON.parse(localStorage.getItem("previousCity")) || { previousCity: [] };
@@ -151,8 +136,6 @@ let renderLastSearch = () => {
             create.appendChild(node)
             div.appendChild(create)
         
-            console.log(state)
-            
         }
     }
     saveCity()
@@ -160,10 +143,6 @@ let renderLastSearch = () => {
 
 
 renderLastSearch()
-
-
-// TO DO: LOCAL STORAGE IS NOT SAVED ON PAGE RELOAD..
-// DISPLAY CITY'S WEATHER INFORMATION ON BUTTON CLICK. FIX EVENT LISTENER.
 
 
 
